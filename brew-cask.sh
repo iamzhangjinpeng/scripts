@@ -13,34 +13,36 @@ z_action(){
 
         if [ "$1" = "list" ]; then
             if [ "$latest_ver" != "$local_ver" ]; then
-                echo "++++upgrade++++"
+                echo -e "\033[36m'$c':\033[0m"
+                echo -e "\033[36mlatest is '$latest_ver', local is '$local_ver'\033[0m\n"
+            else
+                echo $c':'
+                echo -e "latest is '$latest_ver', local is '$local_ver'\n"
             fi
-            echo $c':'
-            echo "latest is '$latest_ver', local is '$local_ver'\n"
         elif [ "$1" = "outdated" -a "$latest_ver" != "$local_ver" ]; then
-            echo $c':'
-            echo "latest is '$latest_ver', local is '$local_ver'\n"
+            echo -e "\033[36m'$c':\033[0m"
+            echo -e "\033[36mlatest is '$latest_ver', local is '$local_ver'\033[0m\n"
         elif [ "$1" = "upgrade" -a "$latest_ver" != "$local_ver" ]; then
-            echo $c':'
-            echo "latest is '$latest_ver', local is '$local_ver'\n"
+            echo -e "\033[36m'$c':\033[0m"
+            echo -e "\033[36mlatest is '$latest_ver', local is '$local_ver'\033[0m\n"
             brew cask reinstall $c
         fi
     done
 }
 
 if [ "$1" = "list" ]; then
-    echo "========list========"
+    echo -e "========list========\n"
     z_action "$1"
 elif [ "$1" = "outdated" ]; then
-    echo "========outdated========"
+    echo -e "========outdated========\n"
     z_action "$1"
 elif [ "$1" = "upgrade" ]; then
-    echo "========upgrade========"
+    echo -e "========upgrade========\n"
     z_action "$1"
 elif [ "$1" = "help" ]; then
-    echo "========help========"
+    echo -e "========help========\n"
     z_help
 else
-    echo "========error========"
+    echo -e "========error========\n"
     z_help
 fi
