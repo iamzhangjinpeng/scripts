@@ -11,8 +11,8 @@ def merge_sort(arr):
     return merge(left, right)
 
 def merge(left, right):
-    l, r = 0, 0
     result = []
+    l, r = 0, 0
     while l < len(left) and r < len(right):
         if left[l] < right[r]:
             result.append(left[l])
@@ -25,7 +25,7 @@ def merge(left, right):
     return result
 
 if __name__ == "__main__":
-    arr = [1, 3, 9, 0, 2, 4, 7]
+    arr = [1, 3, 9, 0, 2, 4, 7, 8, 6, 5]
 
     print arr, "---default"
     print merge_sort(arr), "---merge"

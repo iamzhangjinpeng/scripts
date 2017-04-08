@@ -3,7 +3,7 @@
 
 def select_sort(arr):
     n = len(arr)
-    for i in range(0, n):
+    for i in range(n - 1):
         min = i
         for j in range(i + 1, n):
             if arr[min] > arr[j]:
@@ -12,7 +12,7 @@ def select_sort(arr):
     return arr
 
 if __name__ == "__main__":
-    arr = [1, 3, 9, 0, 2, 4, 7]
+    arr = [1, 3, 9, 0, 2, 4, 7, 8, 6, 5]
 
     print arr, "---default"
     print select_sort(arr), "---select"
