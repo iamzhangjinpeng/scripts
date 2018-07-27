@@ -8,41 +8,41 @@ z_help(){
 
 z_action(){
     for c in $(brew cask list); do
-        latest_ver=$(brew cask info $c | sed -n '1p' | sed 's/^'$c'\:[[:space:]]//g')
+        latest_ver=$(brew cask info $c | sed -n '1p' | sed 's/^'$c'\:[[:space:]]//g' | sed 's/[[:space:]](.*)//g')
         local_ver=$(brew cask info $c | sed -n '3p' | sed 's/^\/usr\/local\/Caskroom\/'$c'\///g' | sed 's/[[:space:]](.*)//g')
 
         if [ "$1" = "list" ]; then
             if [ "$latest_ver" != "$local_ver" ]; then
-                echo -e "\033[36m'$c':\033[0m"
-                echo -e "\033[36mlatest is '$latest_ver', local is '$local_ver'\033[0m\n"
+                echo "\033[36m'$c':\033[0m"
+                echo "\033[36mlatest is '$latest_ver', local is '$local_ver'\033[0m\n"
             else
                 echo $c':'
-                echo -e "latest is '$latest_ver', local is '$local_ver'\n"
+                echo "latest is '$latest_ver', local is '$local_ver'\n"
             fi
         elif [ "$1" = "outdated" -a "$latest_ver" != "$local_ver" ]; then
-            echo -e "\033[36m'$c':\033[0m"
-            echo -e "\033[36mlatest is '$latest_ver', local is '$local_ver'\033[0m\n"
+            echo "\033[36m'$c':\033[0m"
+            echo "\033[36mlatest is '$latest_ver', local is '$local_ver'\033[0m\n"
         elif [ "$1" = "upgrade" -a "$latest_ver" != "$local_ver" ]; then
-            echo -e "\033[36m'$c':\033[0m"
-            echo -e "\033[36mlatest is '$latest_ver', local is '$local_ver'\033[0m\n"
+            echo "\033[36m'$c':\033[0m"
+            echo "\033[36mlatest is '$latest_ver', local is '$local_ver'\033[0m\n"
             brew cask reinstall $c
         fi
     done
 }
 
 if [ "$1" = "list" ]; then
-    echo -e "========list========\n"
+    echo "========list========\n"
     z_action "$1"
 elif [ "$1" = "outdated" ]; then
-    echo -e "========outdated========\n"
+    echo "========outdated========\n"
     z_action "$1"
 elif [ "$1" = "upgrade" ]; then
-    echo -e "========upgrade========\n"
+    echo "========upgrade========\n"
     z_action "$1"
 elif [ "$1" = "help" ]; then
-    echo -e "========help========\n"
+    echo "========help========\n"
     z_help
 else
-    echo -e "========error========\n"
+    echo "========error========\n"
     z_help
 fi
